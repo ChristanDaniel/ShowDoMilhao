@@ -1,6 +1,6 @@
-// import router from 'next/dist/client/router'
+import router from 'next/dist/client/router'
 import React, { useState } from 'react'
-// import Button from '../components/Button'
+import Button from '../components/Button'
 
 import { Container, InputContainer, ButtonContainer } from './styles'
 
@@ -26,6 +26,11 @@ const HomeContainer = (): JSX.Element => {
           <input placeholder="Nome" onChange={(event) => handleChangeNickname(event.target.value)} value={nickname} />
           <input placeholder="E-Mail" onChange={(event) => handleChangeEmail(event.target.value)} value={email} />
         </InputContainer>
+
+        <ButtonContainer>
+          <Button>Jogar</Button>
+          <Button onClick={() => router.push(`/options`)}>Editar Perguntas</Button>
+        </ButtonContainer>
 
       </Container>
     </>
