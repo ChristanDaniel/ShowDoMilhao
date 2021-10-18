@@ -1,23 +1,40 @@
-// import axios from 'axios'
-import React, { useEffect, useState } from 'react'
+import router from 'next/dist/client/router'
+import axios from 'axios'
+import React, { FormEvent, useEffect, useState } from 'react'
 import Button from '../../components/Button'
 import { OptionsPageContainer, OptionsContent, SelectContainer, Select } from './styles'
+type CategoryProps = {
+  id: number
+  name: string
+}
 
 const OptionsContainer = (): JSX.Element => {
 
-  // const [teste2, setTeste2] = useState([])
+  const difficulty = [
+    { name: 'Any', id: 'any' },
+    { name: 'Easy', id: 'easy' },
+    { name: 'Medium', id: 'medium' },
+    { name: 'Hard', id: 'hard' }
+  ]
 
-  // const getAllPokemon = async () => {
-  //   const response = await axios(`https://opentdb.com/api_category.php`)
-  //   // const response = await axios(`https://opentdb.com/api.php?amount=10`)
-  //   setTeste2(response.data.trivia_categories)
+  const [questionCategory, setQuestionCategory] = useState<CategoryProps[]>([])
+  const [numberCount, setNumberCount] = useState('')
 
-  //   console.log(response)
-  // }
+  const getQuestionsCategory = async () => {
+    const response = await axios(`https://opentdb.com/api_category.php`)
+    setQuestionCategory(response.data.trivia_categories)
 
-  // useEffect(() => {
-  //   getAllPokemon()
-  // }, [])
+    console.log(response.data)
+  }
+
+  const handleNumberCount = (event: FormEvent<HTMLInputElement>) => {
+    event.preventDefault()
+    event.currentTarget.maxLength = 2
+  }
+
+  useEffect(() => {
+    getQuestionsCategory()
+  }, [])
 
   return (
     <>
