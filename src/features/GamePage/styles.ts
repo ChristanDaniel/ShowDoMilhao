@@ -25,6 +25,7 @@ const BodyGameContainer = styled.div`
   flex-direction: column
 
 `
+
 const QuestionsGameContainer = styled.div`
   padding: 100px;
   display: flex;
