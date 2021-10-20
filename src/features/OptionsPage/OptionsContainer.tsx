@@ -69,7 +69,20 @@ const OptionsContainer = (): JSX.Element => {
                 })}
               </Select>
             </div>
-            
+            <div>
+              <p> difficulty </p>
+              <Select name="difficulty">
+                {difficulty.map((difficultyLevel, index) => {
+                  return (
+                    <>
+                      <option key={difficultyLevel.id + index} value={difficultyLevel.name}>
+                        {difficultyLevel.name}
+                      </option>
+                    </>
+                  )
+                })}
+              </Select>
+            </div>
           </SelectContainer>
 
           <Button onClick={() => router.push(`/`)} >Salvar Alterações</Button>
