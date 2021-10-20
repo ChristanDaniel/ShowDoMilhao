@@ -6,8 +6,22 @@ import Button from '../../components/Button'
 // import Button from '../../components/Button'
 import { GamerContainer, HeaderGameContainer, BodyGameContainer, QuestionsGameContainer, QuestionsCategoryContent } from './styles'
 
+type AllQuestions = {
+  id?: number
+  category?: string
+  correct_answer?: string
+  difficulty?: string
+  incorrect_answers: string[]
+  question?: string
+}
+
+type Teste123 = [{
+    name: string,
+    email: string
+}]
+
 const GameContainer = (): JSX.Element => {
-  const [getAllQuestions, setGetAllQuestions] = useState([])
+  const [getAllQuestions, setGetAllQuestions] = useState<AllQuestions[]>([])
 
   const AllQuestions = async () => {
     const response = await axios(`https://opentdb.com/api.php?amount=10`)
@@ -18,6 +32,10 @@ const GameContainer = (): JSX.Element => {
   }
 
   const User: Teste123 = useSelector((state) => state.rootReducer.game.user)
+
+
+
+
 
   useEffect(() => {
     AllQuestions()
