@@ -6,29 +6,62 @@ import Button from '../../components/Button'
 // import Button from '../../components/Button'
 import { GamerContainer, HeaderGameContainer, BodyGameContainer, QuestionsGameContainer, QuestionsCategoryContent } from './styles'
 
-
 const GameContainer = (): JSX.Element => {
+  const [getAllQuestions, setGetAllQuestions] = useState([])
+
+  const AllQuestions = async () => {
+    const response = await axios(`https://opentdb.com/api.php?amount=10`)
+
+    const testeMilagroso = response.data.results
+
+    setGetAllQuestions(testeMilagroso)
+  }
+
+  const User: Teste123 = useSelector((state) => state.rootReducer.game.user)
+
+  useEffect(() => {
+    AllQuestions()
+  }, [])
+
   return (
     <>
       <GamerContainer>
         <HeaderGameContainer>
-          <p key={index.toString()}>Nome: {Sera.name}</p> <span>Email: {Sera.email}</span>
+          {User.map((Sera, index) => {
+            console.log(Sera)
+            return(
+              <>
+              <p key={index.toString()}>Nome: {Sera.name}</p> <span>Email: {Sera.email}</span>
+              </>
+            )
+          })}
           <span>Pontuação</span>
         </HeaderGameContainer>
         <BodyGameContainer>
           <div>
-            <QuestionsGameContainer key={AllQuestion.id}>
-              <QuestionsCategoryContent>
-                <h2>Pergunta N {index.toString()}</h2>
-                <span>Categoria: {AllQuestion.category}</span>
-              </QuestionsCategoryContent>
-              <p>{AllQuestion.question}</p>
-              <div>
-                <Button disabled={!!AllQuestion.correct_answer}>{AllQuestion.correct_answer}</Button>
-
-                <Button key={AllQuestion.id + index.toString()}>{wrong_answer}</Button>
-              </div>
-            </QuestionsGameContainer>
+          {getAllQuestions.map((AllQuestion, index) => {
+            return (
+              <>
+                <QuestionsGameContainer key={AllQuestion.id}>
+                  <QuestionsCategoryContent>
+                    <h2>Pergunta N {index.toString()}</h2>
+                    <span>Categoria: {AllQuestion.category}</span>
+                  </QuestionsCategoryContent>
+                  <p>{AllQuestion.question}</p>
+                  <div>
+                    <Button disabled={!!AllQuestion.correct_answer}>{AllQuestion.correct_answer}</Button>
+                    {AllQuestion.incorrect_answers.map((wrong_answer, index) => {
+                      return (
+                        <>
+                          <Button key={AllQuestion.id + index.toString()}>{wrong_answer}</Button>
+                        </>
+                      )
+                    })}
+                  </div>
+                </QuestionsGameContainer>
+              </>
+            )
+          })}
           </div>
         </BodyGameContainer>
       </GamerContainer>
