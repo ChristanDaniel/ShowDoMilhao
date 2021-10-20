@@ -3,13 +3,13 @@ import axios from 'axios'
 import React, { FormEvent, useEffect, useState } from 'react'
 import Button from '../../components/Button'
 import { OptionsPageContainer, OptionsContent, SelectContainer, Select } from './styles'
+
 type CategoryProps = {
   id: number
   name: string
 }
 
 const OptionsContainer = (): JSX.Element => {
-
   const difficulty = [
     { name: 'Any', id: 'any' },
     { name: 'Easy', id: 'easy' },
@@ -27,9 +27,9 @@ const OptionsContainer = (): JSX.Element => {
     console.log(response.data)
   }
 
-  const handleNumberCount = (event: FormEvent<HTMLInputElement>) => {
+  const handleNumberCount = (event: FormEvent) => {
     event.preventDefault()
-    event.currentTarget.maxLength = 2
+    // event.currentTarget.maxLength = 2
   }
 
   useEffect(() => {
@@ -45,31 +45,34 @@ const OptionsContainer = (): JSX.Element => {
           <SelectContainer>
             <div>
               <p>Amount</p>
-              <input type="number" name="amount" />
+              <form onChange={handleNumberCount}>
+                <input
+                  placeholder=" Quantidade de perguntas Max: 20"
+                  name="amount"
+                  type="number"
+                  onChange={(event) => setNumberCount(event.target.value)}
+                  value={numberCount}
+                />
+              </form>
             </div>
             <div>
               <p> category </p>
-              {/* <Select name="category">
-                {teste2.map((test) => {
-                  return(
+              <Select name="category">
+                {questionCategory.map((QuestionCategory) => {
+                  return (
                     <>
-                      <option key={test.id} value={test.name}>{test.name}</option>
+                      <option key={QuestionCategory.id} value={QuestionCategory.name}>
+                        {QuestionCategory.name}
+                      </option>
                     </>
                   )
                 })}
-              </Select> */}
+              </Select>
             </div>
-            <div>
-              <p> difficulty </p>
-              <Select name="difficulty"></Select>
-            </div>
-            <div>
-              <p> type </p>
-              <Select name="type"></Select>
-            </div>
+            
           </SelectContainer>
 
-          <Button>Salvar Alterações</Button>
+          <Button onClick={() => router.push(`/`)} >Salvar Alterações</Button>
         </OptionsContent>
       </OptionsPageContainer>
     </>
