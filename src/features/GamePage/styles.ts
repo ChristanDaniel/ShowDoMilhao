@@ -12,31 +12,57 @@ const HeaderGameContainer = styled.header`
   padding-top: 12px;
   justify-content: space-evenly;
 
-  background: #FFFFFF;
-
   > p, span {
     font-size: 22px;
+    color: #FFFFFF;
+
+
   }
 `
 const BodyGameContainer = styled.div`
   display: flex;
+  color: #FFFFFF;
 
   justify-content: center;
-  flex-direction: column
+  align-items: center;
+
+  margin-top: 50px;
 
 `
 
 const QuestionsGameContainer = styled.div`
-  padding: 100px;
+  padding: 60px;
   display: flex;
+  justify-content: flex-start;
   flex-direction: column;
-  align-items: center;
-  justify-content: space-around;
+  background: #00008B;
+  width: 700px;
+
+  p {
+      font-size: 26px;
+      margin-bottom: 25px;
+  }
 
   div {
+
     display: flex;
-  flex-direction: column;
+    flex-direction: column;
     justify-content: space-evenly;
+
+    button {
+      margin-bottom: 20px;
+      color: #e2e2e2;
+    }
+  }
+`
+
+const QuestionsCategoryContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+
+  h2 {
+    margin-bottom: 8px
   }
 `
 
@@ -44,4 +70,4 @@ const QuestionsGameContainer = styled.div`
 
 
 
-export {GamerContainer, HeaderGameContainer, BodyGameContainer, QuestionsGameContainer}
+export {GamerContainer, HeaderGameContainer, BodyGameContainer, QuestionsGameContainer, QuestionsCategoryContent}

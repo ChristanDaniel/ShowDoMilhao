@@ -34,9 +34,6 @@ const GameContainer = (): JSX.Element => {
   const User: Teste123 = useSelector((state) => state.rootReducer.game.user)
 
 
-
-
-
   useEffect(() => {
     AllQuestions()
   }, [])
@@ -67,7 +64,7 @@ const GameContainer = (): JSX.Element => {
                   </QuestionsCategoryContent>
                   <p>{AllQuestion.question}</p>
                   <div>
-                    <Button disabled={!!AllQuestion.correct_answer}>{AllQuestion.correct_answer}</Button>
+                    <Button>{AllQuestion.correct_answer}</Button>
                     {AllQuestion.incorrect_answers.map((wrong_answer, index) => {
                       return (
                         <>
