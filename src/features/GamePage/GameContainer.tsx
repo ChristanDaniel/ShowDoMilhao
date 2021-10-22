@@ -6,6 +6,7 @@ import Button from '../../components/Button'
 // import Button from '../../components/Button'
 import { GamerContainer, HeaderGameContainer, BodyGameContainer, QuestionsGameContainer, QuestionsCategoryContent } from './styles'
 
+
 type AllQuestions = {
   id?: number
   category?: string
@@ -22,14 +23,21 @@ type Teste123 = [{
 
 const GameContainer = (): JSX.Element => {
   const [getAllQuestions, setGetAllQuestions] = useState<AllQuestions[]>([])
+  const [teste123, setTeste123] = useState([])
 
   const AllQuestions = async () => {
     const response = await axios(`https://opentdb.com/api.php?amount=10`)
+    console.log(response)
 
     const testeMilagroso = response.data.results
+    const teste1233 = response.data.results.incorrect_answers
 
     setGetAllQuestions(testeMilagroso)
+
+    setTeste123(teste1233)
+
   }
+
 
   const User: Teste123 = useSelector((state) => state.rootReducer.game.user)
 
@@ -65,6 +73,7 @@ const GameContainer = (): JSX.Element => {
                   <p>{AllQuestion.question}</p>
                   <div>
                     <Button>{AllQuestion.correct_answer}</Button>
+                    {console.log('asdasd', AllQuestion.incorrect_answers)}
                     {AllQuestion.incorrect_answers.map((wrong_answer, index) => {
                       return (
                         <>
