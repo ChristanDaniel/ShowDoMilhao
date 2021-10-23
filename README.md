@@ -11,6 +11,8 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 
 - [TypeScript](https://www.typescriptlang.org/) <img align='left' alt='TypeScript' width='35px' src="https://img.icons8.com/color/48/000000/typescript.png"/>
 
+- [React-Redux](https://react-redux.js.org/) <img align='left' alt='React-Redux' width='29px' src="https://d33wubrfki0l68.cloudfront.net/0834d0215db51e91525a25acf97433051f280f2f/c30f5/img/redux.svg" />
+
 
 ## 🔗 Como executar
 
