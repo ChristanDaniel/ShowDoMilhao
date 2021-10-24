@@ -1,5 +1,5 @@
 <h1 align="center">
-  Show do Milhão
+  <img alt='React' src="https://user-images.githubusercontent.com/80167149/138608666-536946b5-0254-47e9-ac6a-5ad8a8cbdd44.png"/>
 </h1>
 
 ## 🚀 Tecnologias
