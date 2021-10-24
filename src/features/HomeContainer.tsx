@@ -21,15 +21,14 @@ const HomeContainer = (): JSX.Element => {
   const [email, setEmail] = useState('')
   const [testeee, setTesteee] = useState('')
 
-
   const dispatch = useDispatch()
 
   const getTest = async () => {
     dispatch({ type: SEND_USER_INFO, name, email})
 
     router.push(`/game`)
-
   }
+
   const porfavor = useSelector(state => state.rootReducer.OptionsCategory.category)
   console.log(porfavor)
 
