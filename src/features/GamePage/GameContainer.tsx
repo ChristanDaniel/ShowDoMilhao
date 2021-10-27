@@ -34,10 +34,6 @@ const GameContainer = (): JSX.Element => {
 
     const testeMilagroso = response.data.results
     setGetAllQuestions(testeMilagroso)
-
-    // setTeste123(teste1233)
-    // setGroupingQuestions(response.data.results)
-    // console.log('TESTE GROUPING', groupingQuestions)
   }
 
 
@@ -82,10 +78,6 @@ const GameContainer = (): JSX.Element => {
                     <span>Categoria: {AllQuestion.category}</span>
                   </QuestionsCategoryContent>
                   <p>{AllQuestion.question}</p>
-                  {/* <QuestionsButton
-                    incorrectAnswers={AllQuestion.incorrect_answers}
-                    correctAnswer={AllQuestion.correct_answer}
-                  >{AllQuestion.incorrect_answers}</QuestionsButton> */}
                   <div>
                     <Button>{AllQuestion.correct_answer}</Button>
                     {console.log('asdasd', AllQuestion.incorrect_answers)}
