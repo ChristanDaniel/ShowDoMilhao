@@ -66,8 +66,57 @@ const QuestionsCategoryContent = styled.div`
   }
 `
 
+// interface LiContentProps {
+//   classButton: boolean;
+// }
+
+interface LiContentProps {
+  classButton: boolean;
+  // activeColor: 'true' | 'false';
+}
+
+// const colors = {
+//   true: '#33CC95',
+//   false: '#E52E40'
+
+// };
+
+const QuestionsButtons = styled.button<LiContentProps>`
+  height: 50px;
+  border-radius: 8px;
+  font-weight: 500;
+
+  -webkit-text-fill-color: #000000;
+  padding: 0 28px;
+  font-size: 15px;
+  margin-top: 10px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  cursor: pointer;
+  border: 0;
+
+  transition: 0.2s;
+
+  :hover {
+    filter: brightness(0.9);
+  }
+  /*
+  &.outlined {
+    background: #FFF;
+    border: 1px solid #835afd;
+    color: #835afd;
+  } */
+
+  background: ${props => props.classButton ? '#58ABF6' : '#FFA756'};
+  `
 
 
 
 
-export {GamerContainer, HeaderGameContainer, BodyGameContainer, QuestionsGameContainer, QuestionsCategoryContent}
+
+
+
+export {GamerContainer, HeaderGameContainer, BodyGameContainer, QuestionsGameContainer, QuestionsCategoryContent, QuestionsButtons}
