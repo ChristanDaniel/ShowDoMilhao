@@ -72,14 +72,8 @@ const QuestionsCategoryContent = styled.div`
 
 interface LiContentProps {
   classButton: boolean;
-  // activeColor: 'true' | 'false';
+  userClicked: boolean;
 }
-
-// const colors = {
-//   true: '#33CC95',
-//   false: '#E52E40'
-
-// };
 
 const QuestionsButtons = styled.button<LiContentProps>`
   height: 50px;
@@ -103,20 +97,15 @@ const QuestionsButtons = styled.button<LiContentProps>`
   :hover {
     filter: brightness(0.9);
   }
-  /*
-  &.outlined {
-    background: #FFF;
-    border: 1px solid #835afd;
-    color: #835afd;
-  } */
 
-  background: ${props => props.classButton ? '#58ABF6' : '#FFA756'};
+  background: ${({ classButton, userClicked }) =>
+      classButton
+        ? 'linear-gradient(90deg, #56FFA4, #59BC86)'
+        : !classButton && userClicked
+        ? 'linear-gradient(90deg, #FF5656, #C16868)'
+        : 'linear-gradient(90deg, #56ccff, #6eafb4)'
+    };
   `
-
-
-
-
-
 
 
 export {GamerContainer, HeaderGameContainer, BodyGameContainer, QuestionsGameContainer, QuestionsCategoryContent, QuestionsButtons}

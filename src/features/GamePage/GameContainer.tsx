@@ -4,10 +4,10 @@ import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import Button from '../../components/Button'
 // import QuestionsButton from '../../components/QuestionsButton'
-import { QuestionButtons, QuestionsButtons } from '../../components/QuestionsButton/styles'
+// import { QuestionButtons, QuestionsButtons } from '../../components/QuestionsButton/styles'
 
 // import Button from '../../components/Button'
-import { GamerContainer, HeaderGameContainer, BodyGameContainer, QuestionsGameContainer, QuestionsCategoryContent } from './styles'
+import { GamerContainer, HeaderGameContainer, BodyGameContainer, QuestionsGameContainer, QuestionsCategoryContent, QuestionsButtons } from './styles'
 
 type AllQuestions = {
   id?: number
@@ -78,7 +78,7 @@ const GameContainer = (): JSX.Element => {
                       <span>Categoria: {AllQuestion.category}</span>
                     </QuestionsCategoryContent>
                     <p>{AllQuestion.question}</p>
-                    <Button>{AllQuestion.correct_answer}</Button>
+                    {/* <Button>{AllQuestion.correct_answer}</Button> */}
                     {AllQuestion.incorrect_answers.map((wrong_answer, index) => {
                       return (
                         <>
