@@ -3,7 +3,7 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import Button from '../../components/Button'
-import QuestionsButton from '../../components/QuestionsButton'
+// import QuestionsButton from '../../components/QuestionsButton'
 import { QuestionButtons, QuestionsButtons } from '../../components/QuestionsButton/styles'
 
 // import Button from '../../components/Button'
@@ -27,7 +27,7 @@ type Teste123 = [
 
 const GameContainer = (): JSX.Element => {
   const [getAllQuestions, setGetAllQuestions] = useState<AllQuestions[]>([])
-  const [teste1234, setTeste1234] = useState(true)
+  const [teste1234, setTeste1234] = useState('')
 
   // const [groupingQuestions, setGroupingQuestions] = useState([])
 
@@ -84,10 +84,12 @@ const GameContainer = (): JSX.Element => {
                         <>
                           <div key={index}>
                             <QuestionsButtons
-                              onClick={() => {
-                                setTeste1234(wrong_answer === AllQuestion.correct_answer)
-                              }}
-                              classButton={teste1234}
+                              // onClick={() => {setTeste1234(wrong_answer === AllQuestion.correct_answer)}}
+                              // classButton={teste1234}
+                              onClick={() => {setTeste1234(wrong_answer)}}
+                              classButton={wrong_answer === AllQuestion?.correct_answer}
+                              userClicked={teste1234 === AllQuestion?.correct_answer}
+
                               // incorrectAnswers={AllQuestion.incorrect_answers}
                               // correctAnswer={AllQuestion.correct_answer}
                             >
