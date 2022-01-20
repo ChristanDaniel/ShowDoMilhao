@@ -32,3 +32,6 @@ $ yarn dev
 
 ```
 Tudo Pronto? Agora é só acessar [`localhost:3000`](http://localhost:3000) do seu navegador.
+
+---
+Feito com 🧡 by Christian Daniel 👋🏻
