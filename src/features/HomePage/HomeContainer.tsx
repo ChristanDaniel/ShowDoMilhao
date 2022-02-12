@@ -1,9 +1,9 @@
 import router from 'next/dist/client/router'
 import React, { useState } from 'react'
-import Button from '../components/Button'
+import Button from '../../components/Button'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { SEND_USER_INFO } from '../redux/actions'
+// import { SEND_USER_INFO } from '../../redux/actions'
 
 import { Container, InputContainer, ButtonContainer } from './styles'
 
@@ -24,12 +24,12 @@ const HomeContainer = (): JSX.Element => {
   const dispatch = useDispatch()
 
   const getTest = async () => {
-    dispatch({ type: SEND_USER_INFO, name, email})
+    // dispatch({ type: SEND_USER_INFO, name, email})
 
     router.push(`/game`)
   }
 
-  const porfavor = useSelector(state => state.rootReducer.OptionsCategory.category)
+  const porfavor = useSelector(state => state)
   console.log(porfavor)
 
   const handleChangeName = async (valueName: string) => {
@@ -44,7 +44,6 @@ const HomeContainer = (): JSX.Element => {
   return (
     <>
       <Container>
-        {/* <h1>{category1}</h1> */}
         <img src="/ShowDoMilhãoLogo.png" alt="Logo" />
 
         <InputContainer>
@@ -53,7 +52,7 @@ const HomeContainer = (): JSX.Element => {
         </InputContainer>
 
         <ButtonContainer>
-          <Button onClick={getTest}>Jogar</Button>
+          <Button onClick={() => getTest}>Jogar</Button>
           <Button onClick={() => router.push(`/options`)}>Editar Perguntas</Button>
         </ButtonContainer>
       </Container>

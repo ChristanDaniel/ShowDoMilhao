@@ -1,8 +1,9 @@
 // import axios from 'axios'
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
-import Button from '../../components/Button'
+import { useDispatch, useSelector } from 'react-redux'
+
+// import Button from '../../components/Button'
 // import QuestionsButton from '../../components/QuestionsButton'
 // import { QuestionButtons, QuestionsButtons } from '../../components/QuestionsButton/styles'
 
@@ -13,7 +14,8 @@ type AllQuestions = {
   id?: number
   category?: string
   correct_answer: string
-  incorrect_answers: [string]
+  incorrect_answers: string[]
+  all_answers: string[]
   difficulty?: string
   question?: string
 }
@@ -29,15 +31,23 @@ const GameContainer = (): JSX.Element => {
   const [getAllQuestions, setGetAllQuestions] = useState<AllQuestions[]>([])
   const [teste1234, setTeste1234] = useState('')
 
+  const dispatch = useDispatch()
+
   // const [groupingQuestions, setGroupingQuestions] = useState([])
 
   const AllQuestions = async () => {
-    const response = await axios(`https://opentdb.com/api.php?amount=10`)
-    console.log(response)
+    const response= await axios(`https://opentdb.com/api.php?amount=10&category=17`)
+    console.log('HAUSHAUSHUAS', response)
 
     const testeMilagroso = response.data.results
+
     setGetAllQuestions(testeMilagroso)
   }
+
+  // const SaveQuestionsRedux = (results: AllQuestions[]) => {
+  //   dispatch({ type: SEND_QUESTIONS_GAME_INFO})
+  // }
+
 
   const User: Teste123 = useSelector((state) => state.rootReducer.game.user)
 
