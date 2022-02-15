@@ -7,6 +7,10 @@ interface IGameState {
   assertions: number;
   timer: number;
   restartTimer: boolean;
+  login?: {
+    name: string;
+    email: string;
+  }
 }
 
 export type { IGameState };

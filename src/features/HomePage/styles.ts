@@ -12,7 +12,7 @@ const Container = styled.main`
 
 `
 
-const InputContainer = styled.div`
+const InputContainer = styled.form`
   display: flex;
   flex-direction: column;
   margin-bottom: 20px;

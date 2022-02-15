@@ -18,7 +18,7 @@ const updateGameData = (
   state: Partial<IGameState>,
   action: IGameActionReturn
 ) => ({
-  ...state, 
+  ...state,
   response: action.payload?.response || state.response,
   questions: action.payload?.questions || state.questions,
   loading: action.payload?.loading || state.loading,
@@ -27,6 +27,7 @@ const updateGameData = (
   assertions: action.payload?.assertions || state.assertions,
   timer: action.payload?.timer || state.timer,
   restartTimer: action.payload?.restartTimer || state.restartTimer,
+  login: action.payload?.login || state.login
 });
 
 const game: Reducer<Partial<IGameState>, IGameActionReturn> = (
