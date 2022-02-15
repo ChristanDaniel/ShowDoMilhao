@@ -1,34 +1,28 @@
 import router from 'next/dist/client/router'
 import React, { FormEvent, useState } from 'react'
 import Button from '../../components/Button'
-// import { useDispatch, useSelector } from 'react-redux'
-
-// import { SEND_USER_INFO } from '../../redux/actions'
 
 import { Container, InputContainer, ButtonContainer } from './styles'
-import { reducersCombined } from '../../redux/reducers'
-import { useLoginGetGameData, useUpdateGameLoginData } from '../../redux/login/loginHooks'
+
 import { useGetGameData, useUpdateGameData } from '../../redux/game/gameHooks'
 import { useDispatch } from 'react-redux'
 import { updateGameData } from '../../redux/game/gameActions'
 
-// function teste2(name: string, email: string) {
-//   return { type: SEND_USER_INFO, name, email}
-// }
-
-
-type Teste123 = {
-  id: string
-}
 
 const HomeContainer = (): JSX.Element => {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const dispatch = useDispatch()
 
-  // const dispatch = useDispatch()
+  const getTest = async (name: string, email: string) => {
+    dispatch(updateGameData({login: {name: name, email: email}}))
+  }
+  const gameStore = useGetGameData();
+  console.log('LoginStore', gameStore)
 
-
+  const handleSubmitForm = (event: FormEvent) => {
+    event.preventDefault();
+  }
 
   return (
     <>
