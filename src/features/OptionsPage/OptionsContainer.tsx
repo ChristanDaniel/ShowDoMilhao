@@ -27,8 +27,13 @@ const OptionsContainer = (): JSX.Element => {
     console.log(response.data)
   }
 
-  const handleNumberCount = (event: FormEvent) => {
-    event.preventDefault()
+  const handleNumberCount = (event: string) => {
+    if(event.length < 20) {
+      setNumberCount(event)
+    } else {
+      return
+      // event.preventDefault()
+    }
     // event.currentTarget.maxLength = 2
   }
 
@@ -45,12 +50,12 @@ const OptionsContainer = (): JSX.Element => {
           <SelectContainer>
             <div>
               <p>Amount</p>
-              <form onChange={handleNumberCount}>
+              <form>
                 <input
                   placeholder=" Quantidade de perguntas Max: 20"
                   name="amount"
                   type="number"
-                  onChange={(event) => setNumberCount(event.target.value)}
+                  onChange={(event) => handleNumberCount(event.target.value)}
                   value={numberCount}
                 />
               </form>
