@@ -1,5 +1,5 @@
 import router from 'next/dist/client/router'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Button from '../../components/Button'
 
 import { Container, InputContainer, ButtonContainer } from './styles'
@@ -7,7 +7,7 @@ import { Container, InputContainer, ButtonContainer } from './styles'
 import { useGetGameData } from '../../redux/game/gameHooks'
 import { useDispatch } from 'react-redux'
 import { updateGameData } from '../../redux/game/gameActions'
-
+import { getListQuestions } from '../../services/GamePage/PageListService'
 
 const HomeContainer = (): JSX.Element => {
   const [name, setName] = useState('')
@@ -15,11 +15,20 @@ const HomeContainer = (): JSX.Element => {
   const dispatch = useDispatch()
 
   const handleLogin = async (name: string, email: string) => {
-    dispatch(updateGameData({login: {name: name, email: email}}))
+    dispatch(updateGameData({ login: { name: name, email: email } }))
   }
 
-  const gameStore = useGetGameData();
+  const gameStore = useGetGameData()
   console.log('LoginStore', gameStore)
+
+  const getQuestionList = async () => {
+    const response = await getListQuestions()
+    console.log('response', response)
+  }
+
+  useEffect(() => {
+    getQuestionList()
+  }, [])
 
   return (
     <>
