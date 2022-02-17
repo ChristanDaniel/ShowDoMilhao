@@ -2,6 +2,7 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+
 import { getListQuestions } from '../../services/GamePage/PageListService'
 
 // import Button from '../../components/Button'
@@ -30,8 +31,10 @@ type Teste123 = [
 const GameContainer = (): JSX.Element => {
   const [getAllQuestions, setGetAllQuestions] = useState<AllQuestions[]>([])
   const [teste1234, setTeste1234] = useState('')
-
-  const dispatch = useDispatch()
+  // const gameStore = useGetGameData().login
+  // console.log('LoginStore', gameStore)
+  const gameStore = useSelector((store) => store)
+  console.log('GAMESTORE', gameStore)
 
   const getQuestionList = async () => {
     const response = await getListQuestions()
@@ -42,34 +45,14 @@ const GameContainer = (): JSX.Element => {
 
   useEffect(() => {
     getQuestionList()
+
+
   }, [])
-
-  // const [groupingQuestions, setGroupingQuestions] = useState([])
-
-  // const AllQuestions = async () => {
-  //   const response= await axios(`https://opentdb.com/api.php?amount=10&category=17`)
-  //   console.log('HAUSHAUSHUAS', response)
-
-  //   const testeMilagroso = response.data.results
-
-  //   setGetAllQuestions(testeMilagroso)
-  // }
-
-  // const SaveQuestionsRedux = (results: AllQuestions[]) => {
-  //   dispatch({ type: SEND_QUESTIONS_GAME_INFO})
-  // }
-
-
-  // const User: Teste123 = useSelector((state) => state.rootReducer.game.user)
 
   const listOrdenada = (incorrect_answers: string[]) => {
     // return pokeList.sort((a, b) => a.id - b.id)
     return incorrect_answers[Math.floor(Math.random()*incorrect_answers.length)]
   }
-
-  // useEffect(() => {
-  //   AllQuestions()
-  // }, [])
 
   return (
     <>
@@ -83,7 +66,7 @@ const GameContainer = (): JSX.Element => {
               </>
             )
           })} */}
-          <span>Pontuação</span>
+          <span>Pontuação  - {gameStore.game.login.name} -- {gameStore.game.login.email}</span>
         </HeaderGameContainer>
         <BodyGameContainer>
           <div>

@@ -1,10 +1,10 @@
-import router from 'next/dist/client/router'
 import React, { useEffect, useState } from 'react'
+import router from 'next/dist/client/router'
 import Button from '../../components/Button'
 
 import { Container, InputContainer, ButtonContainer } from './styles'
 
-import { useGetGameData } from '../../redux/game/gameHooks'
+// import { useGetGameData } from '../../redux/game/gameHooks'
 import { useDispatch } from 'react-redux'
 import { updateGameData } from '../../redux/game/gameActions'
 
@@ -15,10 +15,9 @@ const HomeContainer = (): JSX.Element => {
 
   const handleLogin = async (name: string, email: string) => {
     dispatch(updateGameData({ login: { name: name, email: email } }))
-  }
 
-  const gameStore = useGetGameData()
-  console.log('LoginStore', gameStore)
+    router.push(`/game`)
+  }
 
   return (
     <>
