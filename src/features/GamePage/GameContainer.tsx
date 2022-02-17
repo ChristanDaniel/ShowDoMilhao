@@ -2,14 +2,10 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { IGameState } from '../../redux/game/gameModel'
 
 import { getListQuestions } from '../../services/GamePage/PageListService'
 
-// import Button from '../../components/Button'
-// import QuestionsButton from '../../components/QuestionsButton'
-// import { QuestionButtons, QuestionsButtons } from '../../components/QuestionsButton/styles'
-
-// import Button from '../../components/Button'
 import { GamerContainer, HeaderGameContainer, BodyGameContainer, QuestionsGameContainer, QuestionsCategoryContent, QuestionsButtons } from './styles'
 
 type AllQuestions = {
@@ -21,19 +17,16 @@ type AllQuestions = {
   type: string
 }
 
-type Teste123 = [
-  {
-    name: string
-    email: string
-  }
-]
+type login = {
+  name: string
+  email: string
+} | undefined
 
 const GameContainer = (): JSX.Element => {
   const [getAllQuestions, setGetAllQuestions] = useState<AllQuestions[]>([])
   const [teste1234, setTeste1234] = useState('')
-  // const gameStore = useGetGameData().login
   // console.log('LoginStore', gameStore)
-  const gameStore = useSelector((store) => store)
+  const gameStore = useSelector<IGameState,login>(state => state.login)
   console.log('GAMESTORE', gameStore)
 
   const getQuestionList = async () => {
@@ -45,13 +38,13 @@ const GameContainer = (): JSX.Element => {
 
   useEffect(() => {
     getQuestionList()
-
-
+    // setTeste1234(gameStore)
   }, [])
+  console.log('teste1234', teste1234)
 
   const listOrdenada = (incorrect_answers: string[]) => {
     // return pokeList.sort((a, b) => a.id - b.id)
-    return incorrect_answers[Math.floor(Math.random()*incorrect_answers.length)]
+    return incorrect_answers[Math.floor(Math.random() * incorrect_answers.length)]
   }
 
   return (
@@ -66,13 +59,15 @@ const GameContainer = (): JSX.Element => {
               </>
             )
           })} */}
-          <span>Pontuação  - {gameStore.game.login.name} -- {gameStore.game.login.email}</span>
+          <span>
+            Pontuação - {gameStore?.name} -- {gameStore?.email}
+          </span>
         </HeaderGameContainer>
         <BodyGameContainer>
           <div>
             {getAllQuestions.map((AllQuestion, index) => {
               if (AllQuestion.incorrect_answers.length < 4) {
-                return (AllQuestion.incorrect_answers.push(AllQuestion.correct_answer))
+                return AllQuestion.incorrect_answers.push(AllQuestion.correct_answer)
               }
               return (
                 <>
@@ -90,7 +85,9 @@ const GameContainer = (): JSX.Element => {
                             <QuestionsButtons
                               // onClick={() => {setTeste1234(wrong_answer === AllQuestion.correct_answer)}}
                               // classButton={teste1234}
-                              onClick={() => {setTeste1234(wrong_answer)}}
+                              onClick={() => {
+                                setTeste1234(wrong_answer)
+                              }}
                               classButton={wrong_answer === AllQuestion?.correct_answer}
                               userClicked={teste1234 === AllQuestion?.correct_answer}
 

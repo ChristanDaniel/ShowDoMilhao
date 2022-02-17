@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import router from 'next/dist/client/router'
 import Button from '../../components/Button'
 
 import { Container, InputContainer, ButtonContainer } from './styles'
 
-// import { useGetGameData } from '../../redux/game/gameHooks'
 import { useDispatch } from 'react-redux'
 import { updateGameData } from '../../redux/game/gameActions'
 
