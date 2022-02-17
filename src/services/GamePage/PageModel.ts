@@ -16,4 +16,4 @@ interface getApiResponseProps {
   results: IResults[]
 }
 
-export type { getApiResponseProps }
+export type { getApiResponseProps, IResults }

@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux'
 import { gameState, IGameState } from '../../redux/game/gameModel'
 
 import { getListQuestions } from '../../services/GamePage/PageListService'
+import { IResults } from '../../services/GamePage/PageModel'
 
 import { GamerContainer, HeaderGameContainer, BodyGameContainer, QuestionsGameContainer, QuestionsCategoryContent, QuestionsButtons } from './styles'
 
@@ -23,8 +24,26 @@ const GameContainer = (): JSX.Element => {
 
   const getQuestionList = async () => {
     const response = await getListQuestions()
-    setGetAllQuestions(response.results)
+    // setGetAllQuestions(response.results)
+    console.log('RESPONSE', response)
+
+    response.results.map((question) => {
+      question.incorrect_answers.push(question.correct_answer)
+      setGetAllQuestions((quest) => [
+        ...quest,
+        {
+          category: question.category,
+          correct_answer: question.correct_answer,
+          difficulty: question.difficulty,
+          incorrect_answers: question.incorrect_answers,
+          question: question.question,
+          type: question.type
+        }
+      ])
+    })
   }
+
+  console.log('getAllQuestions', getAllQuestions)
 
   useEffect(() => {
     getQuestionList()
@@ -48,9 +67,9 @@ const GameContainer = (): JSX.Element => {
         <BodyGameContainer>
           <div>
             {getAllQuestions.map((AllQuestion, index) => {
-              if (AllQuestion.incorrect_answers.length < 4) {
-                return AllQuestion.incorrect_answers.push(AllQuestion.correct_answer)
-              }
+              // if (AllQuestion.incorrect_answers.length < 4) {
+              //   return AllQuestion.incorrect_answers.push(AllQuestion.correct_answer)
+              // }
               return (
                 <>
                   <QuestionsGameContainer key={AllQuestion.category}>
@@ -60,7 +79,7 @@ const GameContainer = (): JSX.Element => {
                     </QuestionsCategoryContent>
                     <p>{AllQuestion.question}</p>
                     {/* <Button>{AllQuestion.correct_answer}</Button> */}
-                    {AllQuestion.incorrect_answers.map((wrong_answer, index) => {
+                    {/* {AllQuestion.incorrect_answers.map((wrong_answer, index) => {
                       return (
                         <>
                           <div key={index}>
@@ -81,7 +100,7 @@ const GameContainer = (): JSX.Element => {
                           </div>
                         </>
                       )
-                    })}
+                    })} */}
                   </QuestionsGameContainer>
                 </>
               )
