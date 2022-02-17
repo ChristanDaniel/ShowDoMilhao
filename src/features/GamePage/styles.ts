@@ -10,13 +10,22 @@ const HeaderGameContainer = styled.header`
   width: 100%;
   display: flex;
   padding-top: 12px;
+  align-items: center;
   justify-content: space-evenly;
 
-  > p, span {
+  > span {
     font-size: 22px;
     color: #FFFFFF;
+  }
 
+  p:first-child {
+    font-size: 20px;
+    color: #FFFFFF;
+  }
 
+  p {
+    font-size: 16px;
+    color: #d3d3d3
   }
 `
 const BodyGameContainer = styled.div`

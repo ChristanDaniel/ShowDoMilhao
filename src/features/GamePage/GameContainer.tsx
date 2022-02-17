@@ -1,8 +1,6 @@
-// import axios from 'axios'
-import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { IGameState } from '../../redux/game/gameModel'
+import { useSelector } from 'react-redux'
+import { gameState, IGameState } from '../../redux/game/gameModel'
 
 import { getListQuestions } from '../../services/GamePage/PageListService'
 
@@ -17,30 +15,20 @@ type AllQuestions = {
   type: string
 }
 
-type login = {
-  name: string
-  email: string
-} | undefined
-
 const GameContainer = (): JSX.Element => {
+  const gameStore = useSelector<gameState, IGameState>((state) => state.game)
+
   const [getAllQuestions, setGetAllQuestions] = useState<AllQuestions[]>([])
   const [teste1234, setTeste1234] = useState('')
-  // console.log('LoginStore', gameStore)
-  const gameStore = useSelector<IGameState,login>(state => state.login)
-  console.log('GAMESTORE', gameStore)
 
   const getQuestionList = async () => {
     const response = await getListQuestions()
     setGetAllQuestions(response.results)
-
-    console.log('RESPONSE', response)
   }
 
   useEffect(() => {
     getQuestionList()
-    // setTeste1234(gameStore)
   }, [])
-  console.log('teste1234', teste1234)
 
   const listOrdenada = (incorrect_answers: string[]) => {
     // return pokeList.sort((a, b) => a.id - b.id)
@@ -51,17 +39,11 @@ const GameContainer = (): JSX.Element => {
     <>
       <GamerContainer>
         <HeaderGameContainer>
-          {/* {User.map((Sera, index) => {
-            console.log(Sera)
-            return (
-              <>
-                <p key={index.toString()}>Nome: {Sera.name}</p> <span>Email: {Sera.email}</span>
-              </>
-            )
-          })} */}
-          <span>
-            Pontuação - {gameStore?.name} -- {gameStore?.email}
-          </span>
+          <div>
+            <p>{gameStore.login?.name}</p>
+            <p>{gameStore.login?.email}</p>
+          </div>
+          <span>Pontuação - {gameStore.score}</span>
         </HeaderGameContainer>
         <BodyGameContainer>
           <div>

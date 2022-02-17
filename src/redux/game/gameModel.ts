@@ -13,4 +13,8 @@ interface IGameState {
   }
 }
 
-export type { IGameState };
+interface gameState {
+  game: IGameState
+}
+
+export type { IGameState, gameState };
