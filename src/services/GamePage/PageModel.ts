@@ -7,13 +7,13 @@ interface IResults {
   type: string
 }
 
-interface IDate {
-  response_code: number
-  results: IResults[]
-}
+// interface IDate {
+//   response_code: number
+//   results: IResults[]
+// }
 
 interface getApiResponseProps {
-  data: IDate
+  results: IResults[]
 }
 
 export type { getApiResponseProps }

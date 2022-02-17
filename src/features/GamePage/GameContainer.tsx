@@ -2,6 +2,7 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { getListQuestions } from '../../services/GamePage/PageListService'
 
 // import Button from '../../components/Button'
 // import QuestionsButton from '../../components/QuestionsButton'
@@ -11,13 +12,12 @@ import { useDispatch, useSelector } from 'react-redux'
 import { GamerContainer, HeaderGameContainer, BodyGameContainer, QuestionsGameContainer, QuestionsCategoryContent, QuestionsButtons } from './styles'
 
 type AllQuestions = {
-  id?: number
-  category?: string
+  category: string
   correct_answer: string
+  difficulty: string
   incorrect_answers: string[]
-  all_answers: string[]
-  difficulty?: string
-  question?: string
+  question: string
+  type: string
 }
 
 type Teste123 = [
@@ -33,45 +33,56 @@ const GameContainer = (): JSX.Element => {
 
   const dispatch = useDispatch()
 
+  const getQuestionList = async () => {
+    const response = await getListQuestions()
+    setGetAllQuestions(response.results)
+
+    console.log('RESPONSE', response)
+  }
+
+  useEffect(() => {
+    getQuestionList()
+  }, [])
+
   // const [groupingQuestions, setGroupingQuestions] = useState([])
 
-  const AllQuestions = async () => {
-    const response= await axios(`https://opentdb.com/api.php?amount=10&category=17`)
-    console.log('HAUSHAUSHUAS', response)
+  // const AllQuestions = async () => {
+  //   const response= await axios(`https://opentdb.com/api.php?amount=10&category=17`)
+  //   console.log('HAUSHAUSHUAS', response)
 
-    const testeMilagroso = response.data.results
+  //   const testeMilagroso = response.data.results
 
-    setGetAllQuestions(testeMilagroso)
-  }
+  //   setGetAllQuestions(testeMilagroso)
+  // }
 
   // const SaveQuestionsRedux = (results: AllQuestions[]) => {
   //   dispatch({ type: SEND_QUESTIONS_GAME_INFO})
   // }
 
 
-  const User: Teste123 = useSelector((state) => state.rootReducer.game.user)
+  // const User: Teste123 = useSelector((state) => state.rootReducer.game.user)
 
-  // const listOrdenada = (incorrect_answers: string[]) => {
-  //   // return pokeList.sort((a, b) => a.id - b.id)
-  //   return incorrect_answers[Math.floor(Math.random()*incorrect_answers.length)]
-  // }
+  const listOrdenada = (incorrect_answers: string[]) => {
+    // return pokeList.sort((a, b) => a.id - b.id)
+    return incorrect_answers[Math.floor(Math.random()*incorrect_answers.length)]
+  }
 
-  useEffect(() => {
-    AllQuestions()
-  }, [])
+  // useEffect(() => {
+  //   AllQuestions()
+  // }, [])
 
   return (
     <>
       <GamerContainer>
         <HeaderGameContainer>
-          {User.map((Sera, index) => {
+          {/* {User.map((Sera, index) => {
             console.log(Sera)
             return (
               <>
                 <p key={index.toString()}>Nome: {Sera.name}</p> <span>Email: {Sera.email}</span>
               </>
             )
-          })}
+          })} */}
           <span>Pontuação</span>
         </HeaderGameContainer>
         <BodyGameContainer>
@@ -82,7 +93,7 @@ const GameContainer = (): JSX.Element => {
               }
               return (
                 <>
-                  <QuestionsGameContainer key={AllQuestion.id}>
+                  <QuestionsGameContainer key={AllQuestion.category}>
                     <QuestionsCategoryContent>
                       <h2>Pergunta N {index.toString()}</h2>
                       <span>Categoria: {AllQuestion.category}</span>

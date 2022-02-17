@@ -7,7 +7,6 @@ import { Container, InputContainer, ButtonContainer } from './styles'
 import { useGetGameData } from '../../redux/game/gameHooks'
 import { useDispatch } from 'react-redux'
 import { updateGameData } from '../../redux/game/gameActions'
-import { getListQuestions } from '../../services/GamePage/PageListService'
 
 const HomeContainer = (): JSX.Element => {
   const [name, setName] = useState('')
@@ -20,15 +19,6 @@ const HomeContainer = (): JSX.Element => {
 
   const gameStore = useGetGameData()
   console.log('LoginStore', gameStore)
-
-  const getQuestionList = async () => {
-    const response = await getListQuestions()
-    console.log('response', response)
-  }
-
-  useEffect(() => {
-    getQuestionList()
-  }, [])
 
   return (
     <>
