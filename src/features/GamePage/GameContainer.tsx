@@ -8,6 +8,7 @@ import { IResults } from '../../services/GamePage/PageModel'
 import { GamerContainer, HeaderGameContainer, BodyGameContainer, QuestionsGameContainer, QuestionsCategoryContent, QuestionsButtons } from './styles'
 
 type AllQuestions = {
+  id: number
   category: string
   correct_answer: string
   difficulty: string
@@ -28,10 +29,11 @@ const GameContainer = (): JSX.Element => {
     console.log('RESPONSE', response)
 
     response.results.map((question) => {
-      question.incorrect_answers.push(question.correct_answer)
+      shuffleArray(question.incorrect_answers).push(question.correct_answer)
       setGetAllQuestions((quest) => [
         ...quest,
         {
+          id: Math.random(),
           category: question.category,
           correct_answer: question.correct_answer,
           difficulty: question.difficulty,
@@ -43,16 +45,21 @@ const GameContainer = (): JSX.Element => {
     })
   }
 
+  const shuffleArray = (array: string[]) => {
+    for (let i = array.length - 1; i > 0; i -= 1) {
+      const j = Math.floor(Math.random() * (i + 1));
+      const temp = array[i];
+      array[i] = array[j];
+      array[j] = temp;
+    }
+    return array;
+  };
+
   console.log('getAllQuestions', getAllQuestions)
 
   useEffect(() => {
     getQuestionList()
   }, [])
-
-  const listOrdenada = (incorrect_answers: string[]) => {
-    // return pokeList.sort((a, b) => a.id - b.id)
-    return incorrect_answers[Math.floor(Math.random() * incorrect_answers.length)]
-  }
 
   return (
     <>
@@ -67,42 +74,35 @@ const GameContainer = (): JSX.Element => {
         <BodyGameContainer>
           <div>
             {getAllQuestions.map((AllQuestion, index) => {
-              // if (AllQuestion.incorrect_answers.length < 4) {
-              //   return AllQuestion.incorrect_answers.push(AllQuestion.correct_answer)
-              // }
               return (
-                <>
-                  <QuestionsGameContainer key={AllQuestion.category}>
-                    <QuestionsCategoryContent>
-                      <h2>Pergunta N {index.toString()}</h2>
-                      <span>Categoria: {AllQuestion.category}</span>
-                    </QuestionsCategoryContent>
-                    <p>{AllQuestion.question}</p>
-                    {/* <Button>{AllQuestion.correct_answer}</Button> */}
-                    {/* {AllQuestion.incorrect_answers.map((wrong_answer, index) => {
-                      return (
-                        <>
-                          <div key={index}>
-                            <QuestionsButtons
-                              // onClick={() => {setTeste1234(wrong_answer === AllQuestion.correct_answer)}}
-                              // classButton={teste1234}
-                              onClick={() => {
-                                setTeste1234(wrong_answer)
-                              }}
-                              classButton={wrong_answer === AllQuestion?.correct_answer}
-                              userClicked={teste1234 === AllQuestion?.correct_answer}
+                <QuestionsGameContainer key={AllQuestion.id + index}>
+                  <QuestionsCategoryContent>
+                    <h2>Pergunta N {index.toString()}</h2>
+                    <span>Categoria: {AllQuestion.category}</span>
+                  </QuestionsCategoryContent>
+                  <p>{AllQuestion.question}</p>
 
-                              // incorrectAnswers={AllQuestion.incorrect_answers}
-                              // correctAnswer={AllQuestion.correct_answer}
-                            >
-                              {wrong_answer}
-                            </QuestionsButtons>
-                          </div>
-                        </>
-                      )
-                    })} */}
-                  </QuestionsGameContainer>
-                </>
+                  {AllQuestion.incorrect_answers.map((wrong_answer, index) => {
+                    return (
+                      <div key={index + wrong_answer.length + 1}>
+                        <QuestionsButtons
+                          // onClick={() => {setTeste1234(wrong_answer === AllQuestion.correct_answer)}}
+                          // classButton={teste1234}
+                          onClick={() => {
+                            setTeste1234(wrong_answer)
+                          }}
+                          classButton={wrong_answer === AllQuestion?.correct_answer}
+                          userClicked={teste1234 === AllQuestion?.correct_answer}
+
+                          // incorrectAnswers={AllQuestion.incorrect_answers}
+                          // correctAnswer={AllQuestion.correct_answer}
+                        >
+                          {wrong_answer}
+                        </QuestionsButtons>
+                      </div>
+                    )
+                  })}
+                </QuestionsGameContainer>
               )
             })}
           </div>
