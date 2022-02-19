@@ -6,6 +6,7 @@ import { Container, InputContainer, ButtonContainer } from './styles'
 
 import { useDispatch } from 'react-redux'
 import { updateGameData } from '../../redux/game/gameActions'
+import { Footer } from '../../components/Footer'
 
 const HomeContainer = (): JSX.Element => {
   const [name, setName] = useState('')
@@ -32,6 +33,8 @@ const HomeContainer = (): JSX.Element => {
           <Button onClick={() => handleLogin(name, email)}>Jogar</Button>
           <Button onClick={() => router.push(`/options`)}>Editar Perguntas</Button>
         </ButtonContainer>
+
+        <Footer />
       </Container>
     </>
   )
